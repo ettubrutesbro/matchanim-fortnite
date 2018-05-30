@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import FontAwesome from "react-fontawesome";
 import numeral from "numeral";
-import {LocaleText} from './Locale'
+// import {LocaleText} from './Locale'
 import { media } from "./responsive";
 
 
@@ -234,7 +234,7 @@ class Match extends Component {
       alive
     } = this.props;
 
-    let resultText = "";
+    /* let resultText = "";
     if (result.endsWith("matches")) {
       resultText = (
         <div id="matches">
@@ -244,10 +244,22 @@ class Match extends Component {
     } else {
       resultText = <div id={result.replace(/\s/g, "")} />;
     }
+    */
+    const possibleFinishes = [
+      'top 25 ', 'top 5 ', 'top 6 ', 'winner ', 'defeat '
+    ]
+    const mockResultClass = possibleFinishes[Math.floor(Math.random()*possibleFinishes.length)]
+    const mockResultString = mockResultClass === 'top 25 '? 'TOP 25S':
+      mockResultClass === 'top 5 '? 'TOP 5S':
+      mockResultClass === 'top 6 '? 'TOP 6S':
+      mockResultClass === 'winner '? 'WINNER':
+      'DEFEAT'
+  
+    
     return (
       <Tile className="match">
         <ResultWrap>
-          <Result className={`${result} result`}>{resultText}</Result>
+          <Result className={`${mockResultClass} result`}> {mockResultString} </Result>
         </ResultWrap>
         <Time>{time}</Time>
         <PlatformWrap>
@@ -256,6 +268,7 @@ class Match extends Component {
         <Mode className="mode">{mode}</Mode>
         <Score>
           <div id="score" />
+          Score
           <b>
             {numeral(score)
               .format("+0,0")
@@ -264,6 +277,7 @@ class Match extends Component {
         </Score>
         <Kills>
           <div id="kills" />
+                    Kills
           <b>{numeral(kills).format("0,0")}</b>
         </Kills>
         <Wins>

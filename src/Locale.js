@@ -3,10 +3,10 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { get } from "lodash";
-import LocaleComponent from "../locale";
+import LocaleComponent from "./localeindex";
 import ReactSVG from "react-svg";
 import { media } from "./responsive";
-import { changeLanguageAndSetCookie } from "../actions/preferences";
+import { changeLanguageAndSetCookie } from "./preferences";
 
 const LocaleNav = styled.div`
   border: 1px solid #202020;

@@ -9,7 +9,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
+        <table
+          style = {{
+            verticalAlign: 'middle',
+            borderCollapse: 'separate',
+            width: '100%',
+            borderSpacing: '0px 5px',
+            background: '#d8e2f7'
+          }}
+        >
         {MATCHES.map((match, index)=>{
           const { summary } = match;
           let result = match._result;
@@ -29,6 +37,7 @@ class App extends Component {
             />
           )
         })}
+        </table>
       </div>
     );
   }
