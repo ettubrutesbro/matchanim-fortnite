@@ -7,6 +7,8 @@ import numeral from "numeral";
 // import {LocaleText} from './Locale'
 import { media } from "./responsive";
 
+import moment from 'moment'
+
 
 function humanizeDuration(seconds) {
   if (seconds == "N/A") {
@@ -210,6 +212,27 @@ const Score = styled.td``;
 const Kills = styled.td``;
 const Alive = styled.td``;
 const Wins = styled.td``;
+
+const fakematch = { //for prototyping adding
+    timestamp: moment(Date.now()),
+    platform: 'pc',
+    mode: 'solo',
+    season: 'season-4',
+    matchesPlayed: 1,
+    '_result': '1 match',
+    summary: {
+        kills: Math.floor(Math.random()*15),
+        score: Math.floor(Math.random()*1000),
+        placetop1: 0,
+        placetop10: 0,
+        placetop25: 0,
+        matchesPlayed: 0,
+        minutesPlayed: null,
+        timePlayed: 0,
+        wins: 0,
+        losses: 0
+    }
+}
 
 class Match extends Component {
   static propTypes = {
