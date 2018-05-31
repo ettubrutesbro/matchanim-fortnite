@@ -24,7 +24,7 @@ const Timer = styled.div`
 `
 const Notifications = styled.div`
   position: absolute;
-  top: 0; left: 0;
+  top: -1px; left: 0;
   width: 220px;
   height: 25px;
   transform: translateY(-100%);
@@ -40,7 +40,8 @@ const NotificationInOut = keyframes`
 
 const NewMatches = styled.div`
   position: absolute;
-  width: 100%;
+  left: 0;
+  width: calc(100% - 1px);
   height: 100%;
   transform: translateY(100%);
   animation: ${NotificationInOut} 4s linear forwards;
@@ -54,7 +55,8 @@ const NewMatches = styled.div`
 `
 const NoNewMatches = styled.div`
   position: absolute;
-  width: 100%;
+  left: 0;
+  width: calc(100% - 1px);
   height: 100%;
   transform: translateY(100%);
   animation: ${NotificationInOut} 4s linear forwards;
