@@ -34,8 +34,8 @@ const Notifications = styled.div`
 
 const NotificationInOut = keyframes`
   0% {transform: translateY(100%);}
-  12.5% {transform: translateY(0);}
-  87.5% {transform: translateY(0);}
+  10% {transform: translateY(0);}
+  80% {transform: translateY(0);}
   100% {transform: translateY(100%);}
 `
 
@@ -45,7 +45,7 @@ const NewMatches = styled.div`
   width: calc(100% - 1px);
   height: 100%;
   transform: translateY(100%);
-  animation: ${NotificationInOut} 4s linear forwards;
+  animation: ${NotificationInOut} 4s forwards;
   color: #31476F;
   background: white;
   display: flex;
@@ -60,7 +60,7 @@ const NoNewMatches = styled.div`
   width: calc(100% - 1px);
   height: 100%;
   transform: translateY(100%);
-  animation: ${NotificationInOut} 4s linear forwards;
+  animation: ${NotificationInOut} 4s forwards;
   color: #31476F;
   background: white;
   box-sizing: border-box;
@@ -221,6 +221,7 @@ class App extends Component {
         >
         <tbody>
         <FlipMove
+          duration = {400}
           enterAnimation = {{from: {opacity: 0}, to: {opacity: 1}}}
           leaveAnimation = {{from: {opacity: 1}, to: {opacity: 0}}}
         >
@@ -233,6 +234,7 @@ class App extends Component {
           
           return(
             <Match
+              isNew = {index===0 && addMatches.length > 0} //TODO: this logic will only work for hacky mocks
               key={match.timestamp}
               result={result}
               time={moment(match.timestamp).fromNow()}

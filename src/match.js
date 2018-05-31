@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import FontAwesome from "react-fontawesome";
 import numeral from "numeral";
 // import {LocaleText} from './Locale'
@@ -48,9 +48,17 @@ function humanizeDuration(seconds) {
     return formatDays + formatHrs + formatMnts + formatSecond;
   }
 }
+const YellowFade = keyframes`
+  0% { background: #FFFAD6;}
+  50% { background: #FFFAD6;}
+  100% { background: #fafafa;}
+`
 
 const Tile = styled.tr`
   background: #fafafa;
+  &.arrivedViaUpdate{
+    animation: ${YellowFade} 4s forwards;
+  }
   ${media.phone`
     height: 50px;
     td {
@@ -280,7 +288,7 @@ class Match extends Component {
   
     
     return (
-      <Tile className="match">
+      <Tile className={["match", this.props.isNew? 'arrivedViaUpdate' : ''].join(' ')}>
         <ResultWrap>
           <Result className={`${mockResultClass} result`}> {mockResultString} </Result>
         </ResultWrap>
