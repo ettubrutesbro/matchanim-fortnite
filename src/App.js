@@ -5,49 +5,87 @@ import {MATCHES} from './mockMatches.js'
 import Match from './match'
 import moment from 'moment'
 
+import FontAwesome from 'react-fontawesome'
+
 import styled, {keyframes} from 'styled-components'
 
 const Timer = styled.div`
   position: relative;
-  background: #f3f3f5;
+  background: #31476F;
+  color: white;
   border: 1px solid black;
-  padding: 15px;
+  padding: 5px 10px;
   margin-bottom: 100px;
+  width: 220px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  box-sizing: border-box;
 `
 const Notifications = styled.div`
   position: absolute;
   top: 0; left: 0;
-  border: 1px solid red;
-  width: 100%;
-  height: 100%;
-  transform: translateY(100%);
+  width: 220px;
+  height: 25px;
+  transform: translateY(-100%);
   overflow: hidden;
 `
 
-
 const NotificationInOut = keyframes`
-  0% {transform: translateY(-100%);}
+  0% {transform: translateY(100%);}
   12.5% {transform: translateY(0);}
   87.5% {transform: translateY(0);}
-  100% {transform: translateY(-100%);}
+  100% {transform: translateY(100%);}
 `
 
 const NewMatches = styled.div`
   position: absolute;
-  border: 2px solid green;
   width: 100%;
   height: 100%;
-  transform: translateY(-100%);
+  transform: translateY(100%);
   animation: ${NotificationInOut} 4s linear forwards;
+  color: #31476F;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  justify-content: space-between;
+  box-sizing: border-box;
 `
 const NoNewMatches = styled.div`
   position: absolute;
-  border: 2px solid blue;
   width: 100%;
   height: 100%;
-  transform: translateY(-100%);
+  transform: translateY(100%);
   animation: ${NotificationInOut} 4s linear forwards;
+  color: #31476F;
+  background: white;
+  box-sizing: border-box;
+`
+const IntervalText = styled.div`
+  color: white;
+  text-align: left;
+  font-size: 16px;
+  display: inline-flex;
 
+`
+const NextUpdatePrompt = styled.div`
+  color: #95ACD5;
+  text-align: left;
+  font-size: 13px;
+  margin-top: 2px;
+  padding-left: 20px;
+  display: inline-flex;
+`
+
+const NewMatchCheckBlock = styled.div`
+  color: white;
+  display: flex;
+  background: #BE7FD4;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  height: 100%;
 `
 
 
@@ -128,19 +166,32 @@ class App extends Component {
     return (
       <div className="App">
         <Timer>
+          <IntervalText> 
+
+            <i class="fa fa-clock-o" aria-hidden="true" style = {{marginRight: '7px'}} />
+            25 minutes 40 seconds 
+          </IntervalText>
+          <NextUpdatePrompt>
+            NEXT UPDATE 
+            <FontAwesome name = "question-circle" style = {{marginLeft: '5px'}}/>
+          </NextUpdatePrompt>
           <Notifications>
             {showNoMatchNotification && 
               <NoNewMatches
                 onAnimationEnd = {this.unsetNotifications}
               >
-                Sorry no new matches this time
+                Sowwy no new matches
               </NoNewMatches>
             }
             {showNewMatchNotification && 
               <NewMatches
                 onAnimationEnd = {this.unsetNotifications}
               >
-                Hooray a new match came in
+                
+               ! Match Result Added
+               <NewMatchCheckBlock>
+                <FontAwesome name = "check" />
+              </NewMatchCheckBlock>
               </NewMatches>
             }
           </Notifications>
@@ -163,7 +214,7 @@ class App extends Component {
           }}
         >
         <tbody>
-        {matchList.map((match, index)=>{
+        {matchList.slice(0,10).map((match, index)=>{
           const { summary } = match;
           let result = match._result;
           if (result == "1 match") {
