@@ -1,11 +1,11 @@
 .App {
   text-align: center;
-  background: #E0E7F8;
   margin-top: 50px;
 }
 
 td{
   text-align: left;
+  vertical-align: middle;
 }
 
 .App-logo {

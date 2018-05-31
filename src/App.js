@@ -6,6 +6,7 @@ import Match from './match'
 import moment from 'moment'
 
 import FontAwesome from 'react-fontawesome'
+import FlipMove from 'react-flip-move'
 
 import styled, {keyframes} from 'styled-components'
 
@@ -110,11 +111,12 @@ class App extends Component {
   setIntervalUpdate = () => {
     //warning: i don't have any code unsetting
     //this interval.
-    setInterval(this.randomlyAddMatchOrNot, 10000)
+    setInterval(this.randomlyAddMatchOrNot, 6000)
   }
 
   randomlyAddMatchOrNot = () => {
-    const rando = Math.random() > 0.5
+    // const rando = Math.random() > 0.5
+    const rando = true
     console.log('did update yield new match data?',rando)
     if(rando){ 
       this.setState({showNewMatchNotification: true}, this.addMatch)
@@ -218,15 +220,20 @@ class App extends Component {
           }}
         >
         <tbody>
+        <FlipMove
+          enterAnimation = {{from: {opacity: 0}, to: {opacity: 1}}}
+          leaveAnimation = {{from: {opacity: 1}, to: {opacity: 0}}}
+        >
         {matchList.slice(0,10).map((match, index)=>{
           const { summary } = match;
           let result = match._result;
           if (result == "1 match") {
             // result = this.getResultTextFromSummary(summary);
           }
+          
           return(
             <Match
-              key={index}
+              key={match.timestamp}
               result={result}
               time={moment(match.timestamp).fromNow()}
               mode={match.mode}
@@ -236,7 +243,24 @@ class App extends Component {
               alive={summary.minutesPlayed}
             />
           )
+          
+          /*
+          return (
+            <div 
+              key = {match.timestamp}
+              style = {{
+                background: 'white',
+                marginBottom: '5px'
+              }}
+            >
+              Score: {summary.score}
+
+            </div>
+          )
+        */
+
         })}
+        </FlipMove>
         </tbody>
         </table>
       </div>
