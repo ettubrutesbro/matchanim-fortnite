@@ -49,7 +49,7 @@ const NewMatches = styled.div`
   display: flex;
   align-items: center;
   padding-left: 10px;
-  justify-content: space-between;
+  overflow: hidden;
   box-sizing: border-box;
 `
 const NoNewMatches = styled.div`
@@ -80,6 +80,8 @@ const NextUpdatePrompt = styled.div`
 
 const NewMatchCheckBlock = styled.div`
   color: white;
+  position: absolute;
+  right: 0;
   display: flex;
   background: #BE7FD4;
   align-items: center;
